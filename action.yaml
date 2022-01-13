@@ -31,6 +31,13 @@ runs:
       run: reviewdog -version
       shell: bash
       working-directory: ${{ inputs.working_directory }}
+    - name: check shellcheck
+      run: |
+        if command -v shellcheck > /dev/null 2>&1; then
+          shellcheck -V
+        fi
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
 
     - name: actionlint
       shell: bash
