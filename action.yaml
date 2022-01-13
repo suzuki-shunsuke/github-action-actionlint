@@ -12,6 +12,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: 'Link to Action: https://github.com/suzuki-shunsuke/github-action-actionlint'
+      run: |
+        echo "::debug::Link to Action: https://github.com/suzuki-shunsuke/github-action-actionlint"
+      shell: bash
+
     - run: |
         echo "::error ::github_token is required. https://github.com/suzuki-shunsuke/github-action-actionlint"
         exit 1
