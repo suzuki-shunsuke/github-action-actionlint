@@ -2,7 +2,6 @@
 
 GitHub Actions for actionlint
 
-GitHub Actions for actionlint.
 Run actionlint and notify the result with reviewdog.
 This GitHub Actions does **not** install actionlint and reviewdog, so you have to install them in advance.
 It allows to install tools outside this action.
