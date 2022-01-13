@@ -1,0 +1,51 @@
+name: actionlint
+description: actionlint action
+inputs:
+  github_token:
+    description: 'GitHub Access Token'
+    required: false
+    default: ${{ github.token }}
+  working_directory:
+    description: 'Working Directory'
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: 'Link to Action: https://github.com/suzuki-shunsuke/github-action-actionlint'
+      run: |
+        echo "::debug::Link to Action: https://github.com/suzuki-shunsuke/github-action-actionlint"
+      shell: bash
+
+    - run: |
+        echo "::error ::github_token is required. https://github.com/suzuki-shunsuke/github-action-actionlint"
+        exit 1
+      shell: bash
+      if: inputs.github_token == ''
+
+    - name: check actionlint is installed
+      run: actionlint -version
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+    - name: check reviewdog is installed
+      run: reviewdog -version
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: actionlint
+      shell: bash
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ inputs.github_token }}
+      run: |
+        reporter=github-check
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          reporter=github-pr-review
+        fi
+        actionlint |
+          reviewdog \
+            -efm="%f:%l:%c: %m" \
+            -name="actionlint" \
+            -filter-mode=nofilter \
+            -reporter="$reporter" \
+            -level=warning \
+            -fail-on-error=1
