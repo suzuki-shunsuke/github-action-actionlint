@@ -23,11 +23,11 @@ This GitHub Actions does **not** install actionlint, so we can install them outs
 ## Example
 
 ```yaml
-- name: suzuki-shunsuke/github-action-actionlint@v0.1.0
+- name: suzuki-shunsuke/github-action-actionlint@v0.1.2
 ```
 
 ```yaml
-- name: suzuki-shunsuke/github-action-actionlint@v0.1.0
+- name: suzuki-shunsuke/github-action-actionlint@v0.1.2
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
