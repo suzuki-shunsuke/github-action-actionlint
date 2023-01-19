@@ -6,6 +6,6 @@ registries:
   ref: v3.121.0 # renovate: depName=aquaproj/aqua-registry
 
 packages:
-- name: rhysd/actionlint@v1.6.22
+- name: rhysd/actionlint@v1.6.23
 - name: reviewdog/reviewdog@v0.14.1
 - name: koalaman/shellcheck@v0.9.0
