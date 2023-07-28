@@ -5,6 +5,9 @@ inputs:
     description: 'GitHub Access Token'
     required: false
     default: ${{ github.token }}
+  actionlint_options:
+    description: actionlint's command line options
+    required: false
 runs:
   using: composite
   steps:
@@ -36,12 +39,13 @@ runs:
       shell: bash
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ inputs.github_token }}
+        ACTIONLINT_OPTIONS: ${{ inputs.actionlint_options }}
       run: |
         reporter=github-check
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           reporter=github-pr-review
         fi
-        actionlint |
+        actionlint $ACTIONLINT_OPTIONS |
           reviewdog \
             -efm="%f:%l:%c: %m" \
             -name="actionlint" \
