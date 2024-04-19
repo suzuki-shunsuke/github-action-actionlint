@@ -7,5 +7,5 @@ registries:
 
 packages:
 - name: rhysd/actionlint@v1.6.27
-- name: reviewdog/reviewdog@v0.17.3
+- name: reviewdog/reviewdog@v0.17.4
 - name: koalaman/shellcheck@v0.10.0
