@@ -1,11 +1,13 @@
 ---
 # aqua - Declarative CLI Version Manager
 # https://aquaproj.github.io/
+checksum:
+  enabled: true
+  require_checksum: true
 registries:
-- type: standard
-  ref: v4.257.0 # renovate: depName=aquaproj/aqua-registry
-
+  - type: standard
+    ref: v4.257.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: rhysd/actionlint@v1.7.4
-- name: reviewdog/reviewdog@v0.20.2
-- name: koalaman/shellcheck@v0.10.0
+  - name: rhysd/actionlint@v1.7.4
+  - name: reviewdog/reviewdog@v0.20.2
+  - name: koalaman/shellcheck@v0.10.0

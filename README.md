@@ -16,8 +16,14 @@ This GitHub Actions does **not** install actionlint, so we can install them outs
 
 ## Requirements
 
-* [actionlint](https://github.com/rhysd/actionlint)
-* [reviewdog](https://github.com/reviewdog/reviewdog)
+As of v0.1.4, the following tools are optional:
+
+- [actionlint](https://github.com/rhysd/actionlint)
+- [reviewdog](https://github.com/reviewdog/reviewdog)
+- [shellcheck](https://github.com/koalaman/shellcheck)
+
+[aqua.yaml] is passed via the environment variable `$AQUA_GLOBAL_CONFIG`.
+You can change versions by passing aqua.yaml.
 
 ## Example
 

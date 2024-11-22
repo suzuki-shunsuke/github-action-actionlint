@@ -22,25 +22,24 @@ runs:
       shell: bash
       if: inputs.github_token == ''
 
-    - name: check actionlint is installed
-      run: actionlint -version
-      shell: bash
-    - name: check reviewdog is installed
-      run: reviewdog -version
-      shell: bash
-    - name: check shellcheck
-      run: |
-        if command -v shellcheck > /dev/null 2>&1; then
-          shellcheck -V
-        fi
-      shell: bash
+    - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
+      with:
+        aqua_version: v2.38.0
+        skip_install_aqua: "true"
 
+    - run: |
+        export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:$GITHUB_WORKSPACE/aqua.yaml
+        actionlint -version
+        reviewdog -version
+        shellcheck -V
+      shell: bash
     - name: actionlint
       shell: bash
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ inputs.github_token }}
         ACTIONLINT_OPTIONS: ${{ inputs.actionlint_options }}
       run: |
+        export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:$GITHUB_WORKSPACE/aqua.yaml
         reporter=github-check
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           reporter=github-pr-review
