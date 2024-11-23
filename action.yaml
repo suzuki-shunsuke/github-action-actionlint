@@ -44,6 +44,13 @@ runs:
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           reporter=github-pr-review
         fi
+
+        if reviewdog --help 2>&1 | grep -- "-fail-level" >/dev/null; then
+          options="-fail-level=error"
+        else
+          options="-fail-on-error=1"
+        fi
+
         actionlint $ACTIONLINT_OPTIONS |
           reviewdog \
             -efm="%f:%l:%c: %m" \
@@ -51,4 +58,4 @@ runs:
             -filter-mode=nofilter \
             -reporter="$reporter" \
             -level=warning \
-            -fail-on-error=1
+            "$options"
