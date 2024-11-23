@@ -45,11 +45,11 @@ runs:
           reporter=github-pr-review
         fi
 
-        if reviewdog --help 2>&1 | grep -- "-fail-level" >/dev/null; then
-          echo "-fail-level" >&2
+        if ( reviewdog --help 2>&1 || : ) | grep -- "-fail-level" >/dev/null; then
+          echo "use -fail-level" >&2
           options="-fail-level=error"
         else
-          echo "-fail-on-error" >&2
+          echo "use -fail-on-error" >&2
           options="-fail-on-error=1"
         fi
 
