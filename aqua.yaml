@@ -6,7 +6,7 @@ checksum:
   require_checksum: true
 registries:
   - type: standard
-    ref: v4.258.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v4.258.1 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: rhysd/actionlint@v1.7.4
   - name: reviewdog/reviewdog@v0.20.2
