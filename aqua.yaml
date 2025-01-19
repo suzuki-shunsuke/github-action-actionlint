@@ -8,6 +8,6 @@ registries:
   - type: standard
     ref: v4.297.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-  - name: rhysd/actionlint@v1.7.6
+  - name: rhysd/actionlint@v1.7.7
   - name: reviewdog/reviewdog@v0.20.3
   - name: koalaman/shellcheck@v0.10.0
