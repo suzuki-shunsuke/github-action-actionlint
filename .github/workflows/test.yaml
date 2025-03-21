@@ -8,12 +8,9 @@ on:
 jobs:
   path-filter:
     # Get changed files to filter jobs
-    timeout-minutes: 30
+    timeout-minutes: 10
     outputs:
-      update-aqua-checksums: ${{steps.changes.outputs.update-aqua-checksums}}
       renovate-config-validator: ${{steps.changes.outputs.renovate-config-validator}}
-      ghalint: ${{steps.changes.outputs.ghalint}}
-      shellcheck: ${{steps.changes.outputs.shellcheck}}
     runs-on: ubuntu-latest
     permissions: {}
     steps:
@@ -21,11 +18,6 @@ jobs:
         id: changes
         with:
           filters: |
-            update-aqua-checksums:
-              - aqua.yaml
-              - aqua-checksums.json
-              - .github/workflows/test.yaml
-              - .github/workflows/wc-update-aqua-checksums.yaml
             renovate-config-validator:
               - renovate.json5
               - .github/workflows/test.yaml
@@ -34,8 +26,8 @@ jobs:
   status-check:
     # This job is used for main branch's branch protection rule's status check.
     # If all dependent jobs succeed or are skipped this job succeeds.
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
     needs:
       - update-aqua-checksums
       - renovate-config-validator
@@ -45,16 +37,6 @@ jobs:
     steps:
       - run: exit 1
 
-  update-aqua-checksums:
-    needs: path-filter
-    if: needs.path-filter.outputs.update-aqua-checksums == 'true'
-    uses: ./.github/workflows/wc-update-aqua-checksums.yaml
-    permissions:
-      contents: read
-    secrets:
-      gh_app_id: ${{secrets.APP_ID}}
-      gh_app_private_key: ${{secrets.APP_PRIVATE_KEY}}
-
   renovate-config-validator:
     uses: ./.github/workflows/wc-renovate-config-validator.yaml
     needs: path-filter
@@ -63,8 +45,8 @@ jobs:
       contents: read
 
   test:
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
