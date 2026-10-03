@@ -4,6 +4,10 @@ GitHub Actions for actionlint
 
 Run actionlint and notify the result with reviewdog.
 
+## :warning: Deprecated. Use actionlint-action
+
+https://github.com/suzuki-shunsuke/actionlint-action
+
 ## Motivation
 
 We know there are other GitHub Actions for actionlint.
